@@ -17,6 +17,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import static com.hbm.inventory.OreDictManager.QUARTZ;
@@ -28,6 +30,7 @@ public class SpaceCustomRegistry {
 	public static ItemStack BISMUTH_NUGGET = new ItemStack(ModItems.nugget_bismuth);
 	public static ItemStack WOOD_TAR = new ItemStack(ModItems.oil_tar, 1, 3);
 	public static ItemStack PINE_LOG = new ItemStack(Block.getBlockFromName("BiomesOPlenty:logs4"));
+	public static Item LAVA_SIGIL = Item.getItemById(4207);
 
 	public static final OreDictManager.DictFrame AMETHYST = new OreDictManager.DictFrame("Amethyst");
 
@@ -38,6 +41,7 @@ public class SpaceCustomRegistry {
 //		DistilleryRecipes.instance().addRecipe(STONE, STONE, 1,
 //			new ItemStack(ModItems.powder_iodine), new ItemStack(ModItems.powder_iodine), new ItemStack(ModItems.powder_iodine), new ItemStack(ModItems.powder_iodine));
 		GameRegistry.addSmelting(PINE_LOG, WOOD_TAR, 20.0f);
+		GameRegistry.addShapedRecipe(new ItemStack(Items.blaze_rod, 1), " a ", "aba", " a ", 'a', Items.stick, 'b', LAVA_SIGIL);
 		ArcFurnaceRecipes.register(new RecipesCommon.OreDictStack(AMETHYST.gem()),
 			new ArcFurnaceRecipes.ArcFurnaceRecipe().solid(new ItemStack(ModItems.nugget_silicon, 3))
 				.fluid(new Mats.MaterialStack(Mats.MAT_SILICON, MaterialShapes.NUGGET.q(3))));
