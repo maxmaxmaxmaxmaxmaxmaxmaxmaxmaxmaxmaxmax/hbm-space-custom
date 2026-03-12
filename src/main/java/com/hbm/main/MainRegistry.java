@@ -36,6 +36,7 @@ import com.hbm.lib.RefStrings;
 import com.hbm.packet.PacketDispatcher;
 import com.hbm.potion.HbmPotion;
 import com.hbm.saveddata.satellites.Satellite;
+import com.hbm.spacecustom.SpaceCustomRegistry;
 import com.hbm.tileentity.TileMappings;
 import com.hbm.tileentity.bomb.TileEntityLaunchPadBase;
 import com.hbm.tileentity.bomb.TileEntityNukeCustom;
@@ -587,6 +588,8 @@ public class MainRegistry {
 		//the good stuff
 		SerializableRecipe.registerAllHandlers();
 		SerializableRecipe.initialize();
+
+		SpaceCustomRegistry.registerDefaults();
 
 		//Anvil has to come after serializables (i.e. anvil)
 		AnvilRecipes.register();
