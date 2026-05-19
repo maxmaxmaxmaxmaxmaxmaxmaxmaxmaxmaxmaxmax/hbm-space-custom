@@ -7,6 +7,7 @@ import com.hbm.handler.neutron.RBMKNeutronHandler.RBMKType;
 import com.hbm.interfaces.NotableComments;
 
 import api.hbm.energymk2.IEnergyReceiverMK2;
+import api.hbm.redstoneoverradio.IRORValueProvider;
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -21,9 +22,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 @NotableComments
 @Optional.InterfaceList({@Optional.Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "OpenComputers")})
-public abstract class TileEntityRBMKControl extends TileEntityRBMKSlottedBase implements SimpleComponent, CompatHandler.OCComponent, IEnergyReceiverMK2 {
+public abstract class TileEntityRBMKControl extends TileEntityRBMKSlottedBase implements SimpleComponent, CompatHandler.OCComponent, IEnergyReceiverMK2, IRORValueProvider {
 
-	@SideOnly(Side.CLIENT)
 	public double lastLevel;
 	public double level;
 	public static final double speed = 0.00277D; // it takes around 18 seconds for the thing to fully extend
@@ -226,5 +226,18 @@ public abstract class TileEntityRBMKControl extends TileEntityRBMKSlottedBase im
 		double newLevel = args.checkDouble(0)/100.0;
 		targetLevel = MathHelper.clamp_double(newLevel, 0, 1);
 		return new Object[] {};
+	}
+
+	@Override
+	public String[] getFunctionInfo() {
+		return new String[] {
+				PREFIX_VALUE + "extraction"
+		};
+	}
+
+	@Override
+	public String provideRORValue(String name) {
+		if((PREFIX_VALUE + "extraction").equals(name))		return "" + (int) (this.level * 100);
+		return null;
 	}
 }
